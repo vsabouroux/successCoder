@@ -5,6 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 const CoursesInCart = (props)=> {
+    console.log("Props reçues par CoursesInCart:", props); 
  // numberOfLines pour que le texte contienne dans le container prévu
     return (
       <View style = {styles.coursesContainer}>

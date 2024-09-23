@@ -1,18 +1,25 @@
 import React from "react";
 import { FlatList, StyleSheet, Text,TouchableOpacity,View } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import globalStyles from "../styles/globalStyles";
 import EmptyMessage from "../components/EmptyMessage";
 import CoursesInCart from "../components/CoursesInCart";
+import {removeCourseCart} from "../redux/actions/actionRemoveCourseCart"
+import { addPayment } from "../redux/actions/actionPayment";
 
 
 const Cart =(props)=>{
-    console.log("Props reçues par CoursesInCart:", props); 
+
+    const dispatch = useDispatch();
     const cartCourses=useSelector(state => state.cart.cartCourses);
-    console.log(cartCourses); 
     const total = useSelector(state => state.cart.total);
-    // console.log(cartCourses,total);
-    
+
+    console.log("Contenu de cartCourses :", cartCourses);
+    const handlePayment=(cartCourses, total) => {
+        dispatch(addPayment(cartCourses, total));
+        alert("Paiement effectué");
+    }
+
     return(
         <View style={styles.cartContainer}>
           {
@@ -24,10 +31,12 @@ const Cart =(props)=>{
                     keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()} 
                     renderItem={({item})=> (
                         <CoursesInCart
-                        key={item.id}
+                        key={item.idCourse}
                         title={item.title}
                         price={item.price ?? 0}
-                        onDelete ={()=> alert("effacer la formation")}
+                        onDelete ={()=> {
+                            console.log("ID envoyé à removeCourseCart :", item.idCourse); 
+                            dispatch(removeCourseCart(item.idCourse))}}
                         />
                     )}
                     />
@@ -40,7 +49,7 @@ const Cart =(props)=>{
                         </Text>  
                         </Text>
                         <TouchableOpacity 
-                        onPress={()=> alert("Payer")}>
+                        onPress={()=> handlePayment(cartCourses, total)}>
                         <View style = {styles.btnAddPayment}>
                             <Text  style = {styles.btnAddPaymentText}>Payer</Text>
                         </View>
@@ -59,20 +68,22 @@ const Cart =(props)=>{
 const styles=StyleSheet.create({
     cartContainer:{
     margin:20,
+    
     },
     totalContainer:{
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-between",
-        marginTop:19
+        marginTop:19,
+        
     },
     totalText:{
         fontSize:19,
         fontWeight:"bold",
-      
+
     },
     totalPrice:{
-        color:globalStyles.green
+        color:globalStyles.green,
     },
     btnAddPayment:{
         borderRadius:6,

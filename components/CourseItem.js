@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   courseTitle: {
-    fontSize: 16,
+    fontSize: 14,
     marginVertical: 1,
     color: globalStyles.green,
     fontWeight: "bold",
