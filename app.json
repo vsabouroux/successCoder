@@ -19,7 +19,7 @@
       "versionCode":1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#3fA477"
       },
       "package": "com.vsabouroux.successCoder"
     },
