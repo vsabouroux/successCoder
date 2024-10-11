@@ -6,7 +6,9 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal", 
+      "ios" :{
+        "buildType": "development"       }
     },
     "preview": {
       "android": {
@@ -14,8 +16,9 @@
          "distribution": "internal"
       },
       "ios": {
-        "simulator": true,
-         "distribution": "internal"
+        "simulator": false, 
+        "buildType": "development", 
+        "distribution": "internal"  
       }
     },
     "production": {
