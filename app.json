@@ -9,10 +9,9 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#3fA477"
     },
     "ios": {
-      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "bundleIdentifier": "com.vsabouroux.successCoder"
     },
